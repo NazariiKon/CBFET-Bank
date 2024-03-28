@@ -13,12 +13,12 @@ class AuthenticationManager:
         if account != None:
             for attempts in range(3):
                 if self._password_entry(account.password):
-                    break
+                    return account
                 else:
                     print(f"The password's wrong. You have {2 - attempts} attempts left.")  
             exit()
 
-        return account
+        return None
     
     def registration(self, name, surname):
         return self.account_manager.create_account(name, surname)

@@ -2,7 +2,7 @@ class AuthenticationManager:
     def __init__(self, account_manager):
         self.account_manager = account_manager
 
-    def _password_entry(account_password):
+    def _password_entry(self, account_password):
         password = input("Enter your password: ")
         if password == account_password:
             return True
@@ -16,7 +16,7 @@ class AuthenticationManager:
                     break
                 else:
                     print(f"The password's wrong. You have {2 - attempts} attempts left.")  
-                exit()
+            exit()
 
         return account
     

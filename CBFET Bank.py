@@ -3,7 +3,7 @@ from AuthenticationManager import AuthenticationManager
 
 def print_main_menu(name, surname):
     print("\033c", end='') # clear console
-    print(f"Hi, {name + surname}")
+    print(f"Hi, {name} {surname}")
     print("Welcome to CBFET Bank System")
     print("1. Check Account Balance")
     print("2. Lodge Funds")
@@ -55,6 +55,7 @@ account = authentication(account_manager)
 
 while True:
     print_main_menu(account.name, account.surname)
+    if(account.password == account.surname): print("You need to change your password!")
     choice = input()
 
     match choice: 
@@ -71,11 +72,12 @@ while True:
             account_manager.update_account_info_in_dictionary(account)
 
         case '4':
-            pass
+            account.change_password()
+            account_manager.update_account_info_in_dictionary(account)
         case '5':
-            pass
+            account.calculate_interest(12)
         case '6':
-            pass
+            account.print_statement()
         case '7':
             exit()
         case _:

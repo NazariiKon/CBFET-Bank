@@ -33,8 +33,36 @@ class Account:
             
     def withdraw_funds(self, amount):
         if self.balance >= amount:
-            self.balance -= amount
-            input(f"${amount} has been withdrawn. New balance is: ${self.balance}")
-            self.check_interest()
+            if amount > 0:
+                self.balance -= amount
+                input(f"${amount} has been withdrawn. New balance is: ${self.balance}")
+                self.check_interest()
+            else:
+                input("Invalid amount entered.")
         else:
             input("Insufficient funds.")
+            
+    def change_password(self):
+        for attempts in range(3):
+                password = input("Enter your password: ")
+                if password == self.password:
+                    new_password = input("Enter your new password: ")
+                    confirm_password = input("Comfirm your new password: ")
+                    if new_password == confirm_password:
+                        self.password = new_password
+                        return
+                    else:
+                        print("Passwords do not match.")
+                else:
+                    print(f"The password's wrong. You have {2 - attempts} attempts left.")  
+        exit()
+
+    def calculate_interest(self, months):
+        balance = self.balance
+        for month in range(months):
+            interest = balance * (self.interest_rate / 100) / months  # Вычисляем ежемесячный процент
+            balance += interest
+            input(f"Mounth {month + 1}: Balance = {balance:.2f}")
+
+    def print_statement(self):
+        input(f"Name: {self.name}\nSurname: {self.surname}\nAccount number: {self.number}\nBalance: {self.balance}\nInterest rate: {self.interest_rate}")
